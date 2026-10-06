@@ -13,13 +13,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Entity
-@Table (name = "task_lists")
+@Entity 
+@Table (name = "tasks")
 @Data 
 @Builder 
-@NoArgsConstructor
-@AllArgsConstructor
-public class TaskList {
+@NoArgsConstructor 
+@AllArgsConstructor 
+public class Task {
 
     @Id
     @GeneratedValue (strategy = GenerationType.UUID)
@@ -27,4 +27,7 @@ public class TaskList {
 
     @Column (nullable = false, length = 100)
     private String name;
+
+    @Column (length = 500)
+    private String description;
 }

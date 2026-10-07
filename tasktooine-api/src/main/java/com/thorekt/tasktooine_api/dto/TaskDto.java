@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @Builder
@@ -16,6 +17,7 @@ import lombok.NoArgsConstructor;
 public class TaskDto {
 
     private UUID id;
+    @NonNull 
     private String name;
     private String description;
 

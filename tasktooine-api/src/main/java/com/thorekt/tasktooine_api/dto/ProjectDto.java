@@ -2,6 +2,7 @@ package com.thorekt.tasktooine_api.dto;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 import com.thorekt.tasktooine_api.model.Project;
 
@@ -23,14 +24,21 @@ public class ProjectDto {
 
 
     public Project toModel() {
-        return Project.builder()
+        var project = Project.builder()
                 .id(id)
                 .name(name)
                 .description(description)
-                .taskLists(taskLists == null ? null : taskLists.stream()
-                        .map(taskList -> taskList.toModel())
-                        .toList())
                 .build();
+        if (taskLists != null) {
+            project.setTaskLists(taskLists.stream()
+                    .map(taskList -> {
+                        var model = taskList.toModel();
+                        model.setProject(project);
+                        return model;
+                    })
+                    .collect(Collectors.toList()));
+        }
+        return project;
     }
 
     public static ProjectDto fromModel(Project project) {
